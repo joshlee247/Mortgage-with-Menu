@@ -9,11 +9,13 @@ import java.text.DecimalFormat;
 
 public class JCalcFrame extends JFrame implements ActionListener
 {
+  //checks for checkbox bool
   boolean isChecked = false;
   
   FlowLayout flow = new FlowLayout();
   JLabel title = new JLabel("Mortgage Calculator");
 
+  //creates menu bar w/ file menu item
   JMenuBar menu = new JMenuBar();
   JMenu file = new JMenu("File");
   JCheckBoxMenuItem userInputBool = new JCheckBoxMenuItem("User Input");
@@ -28,21 +30,22 @@ public class JCalcFrame extends JFrame implements ActionListener
   JTextField userT = new JTextField("30", 3);
   JTextField userR = new JTextField("5.35");
 
+  //dropdown menu arrays
   double Rate[] = {5.35, 5.50, 5.75};
   int Term[] = {7, 15, 30};
 
+  //dropdown for Rate + Term
   String Dropdown[] = {"7 years at 5.35%", "15 years at 5.50%", "30 years at 5.75%"};
   JComboBox dropdown = new JComboBox(Dropdown);
 
   JButton calcButton = new JButton("Calculate");
-  
   JButton exitButton = new JButton("Exit");
-
   JButton reset = new JButton("Reset");
 
   JLabel result = new JLabel("Your monthly payment is: ");
   JLabel sum = new JLabel("  ");
 
+  //makes boxes class variable
   Box col3;
   Box col2;
   Box row1;
@@ -160,14 +163,29 @@ public class JCalcFrame extends JFrame implements ActionListener
      {
         if(userInputBool.getState()) 
         {
-          //removes the combobox and adds the text fields
+          //removes the combobox
           col2.remove(dropdown);
+          //styles text fields and labels
+          term.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
+          term.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
+          userT.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+          userT.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+
+          //adds components
           col3.add(term);
           col3.add(userT);
 
+          //styles text fields and labels
+          rate.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
+          rate.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
+          userR.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
+          userR.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+
+          //adds components
           col2.add(rate);
           col2.add(userR);
 
+          //checkbox check = true
           isChecked = true;
         }
         else
@@ -182,6 +200,7 @@ public class JCalcFrame extends JFrame implements ActionListener
           isChecked = false;
         }
 
+        //updates the UI
         row1.revalidate();
      }
      else if(source == calcButton)
@@ -196,6 +215,7 @@ public class JCalcFrame extends JFrame implements ActionListener
         double n2 = 0.0;
         int n3 = 0;
 
+        //checks if the checkbox is checked or not
         if(isChecked) {
           String num2 = userR.getText();
           String num3 = userT.getText();

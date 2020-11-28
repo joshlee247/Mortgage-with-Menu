@@ -1,9 +1,9 @@
 /*
-program name: Mortgage Calculator.java
+program name: Mortgage Calculator w/ Menu.java
 programmer: Josh Lee
-date: 11/9/20
-version: 2.0
-Creates a program in Java Swing to compute your monthly mortgage with a seamless UI.
+date: 11/28/20
+version: 1.2.5
+Creates a program in Java Swing to compute your monthly mortgage with a seamless UI and menu to navigate between user input and predefined inputs.
 */
 
 import javax.swing.*;
