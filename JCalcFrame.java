@@ -45,6 +45,7 @@ public class JCalcFrame extends JFrame implements ActionListener
 
   Box col3;
   Box col2;
+  Box row1;
 
   JTextArea textArea = new JTextArea(15, 40);
   JScrollPane displayScroll = new JScrollPane(textArea,
@@ -58,7 +59,7 @@ public class JCalcFrame extends JFrame implements ActionListener
     Container con = getContentPane();
     Box outer = Box.createVerticalBox();
     Box row0 = Box.createHorizontalBox();
-    Box row1 = Box.createHorizontalBox();
+    row1 = Box.createHorizontalBox();
     Box col1 = Box.createVerticalBox();
     col2 = Box.createVerticalBox();
     col3 = Box.createVerticalBox();
@@ -155,23 +156,38 @@ public class JCalcFrame extends JFrame implements ActionListener
   public void actionPerformed(ActionEvent e)
   {
      Object source = e.getSource();
-     if(source == userInputBool && userInputBool.getState()) {
-        //removes the combobox and adds the text fields
-        col2.remove(dropdown);
-        col3.add(term);
-        col3.add(userT);
+     if(source == userInputBool) 
+     {
+        if(userInputBool.getState()) 
+        {
+          //removes the combobox and adds the text fields
+          col2.remove(dropdown);
+          col3.add(term);
+          col3.add(userT);
 
-        col2.add(rate);
-        col2.add(userR);
+          col2.add(rate);
+          col2.add(userR);
 
-        isChecked = true;
+          isChecked = true;
+        }
+        else
+        {
+          //adds the combobox and removes the text fields
+          col2.remove(userR);
+          col3.remove(term);
+          col3.remove(userT);
+          col2.add(rate);
+          col2.add(dropdown);
+
+          isChecked = false;
+        }
+
+        row1.revalidate();
      }
-    col2.setVisible(true);
-    col3.setVisible(true);
-    if(source == calcButton)
+     else if(source == calcButton)
      {
         //sets the decimal to round to 2 decimals
-        String pattern = "###,###.##";
+        String pattern = "###,000.00";
         DecimalFormat df = new DecimalFormat(pattern);
 
         int index = dropdown.getSelectedIndex();
